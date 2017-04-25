@@ -36,16 +36,30 @@ public class DemoApplicationTests {
 	}
 
 	@Test
-	public void testValid() throws Exception {
+    public void JSR303PojoValidationTest() throws Exception {
 
-		JSONObject request = new JSONObject().put("name", "");
+        JSONObject request = new JSONObject().put("name", "");
 
-		mockMvc.perform(
-				post("/test")
-						.accept(MediaType.APPLICATION_JSON)
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(request.toString()))
+        mockMvc.perform(
+                post("/test")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request.toString()))
                 .andDo(print())
-				.andExpect(status().isBadRequest());
-	}
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void veryHardToValidatePojoValidationTest() throws Exception {
+
+        JSONObject request = new JSONObject().put("name", "");
+
+        mockMvc.perform(
+                post("/test2")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(request.toString()))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
 }
